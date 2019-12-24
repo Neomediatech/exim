@@ -1,4 +1,4 @@
-# exim-ubuntu-docker
+# Dockerized Exim on Ubuntu
 
 
 
