@@ -14,7 +14,7 @@ LABEL maintainer="docker-dario@neomediatech.it" \
 COPY bin/* /
 
 RUN apt-get update && apt-get -y dist-upgrade && \
-    apt-get install -y mariadb-client exim4-daemon-heavy libswitch-perl redis-tools && \
+    apt-get install -y mariadb-client exim4-daemon-heavy libswitch-perl redis-tools openssl && \
     rm -rf /var/lib/apt/lists* && \
     useradd -u 5000 -U -s /bin/false -m -d /var/spool/virtual vmail && \
     chmod +x /entrypoint.sh /tini-static-amd64 && \
