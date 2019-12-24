@@ -2,12 +2,13 @@ FROM ubuntu:18.04
 
 ENV VERSION=4.90.1-1ubuntu1.4 \
     DEBIAN_FRONTEND=noninteractive \
-    TZ=Europe/Rome
+    TZ=Europe/Rome \
+    SERVICE=exim-ubuntu
 
 LABEL maintainer="docker-dario@neomediatech.it" \ 
       org.label-schema.version=$VERSION \
       org.label-schema.vcs-type=Git \
-      org.label-schema.vcs-url=https://github.com/Neomediatech/rspamd-ubuntu \
+      org.label-schema.vcs-url=https://github.com/Neomediatech/${SERVICE} \
       org.label-schema.maintainer=Neomediatech
 
 COPY bin/* /
