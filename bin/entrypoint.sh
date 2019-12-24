@@ -1,6 +1,6 @@
 #!/bin/bash
 
-mkdir -p /var/log/exim4/
+mkdir -p /var/log/exim4/ /etc/letsencrypt/live/noservername.domain.tld/
 
 update-exim4.conf
 
