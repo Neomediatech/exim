@@ -1,12 +1,14 @@
 #!/bin/sh -e
+FQDN_MAIL=${FQDN_MAIL:-noservername.domain.tld}
+CERT_DIR="${FQDN_MAIL:-/etc/letsencrypt/live/${FQDN_MAIL}}"
 
-DIR=/etc/letsencrypt/live/noservername.domain.tld
-CERT=$DIR/fullchain.pem
-KEY=$DIR/privkey.pem
+[ ! -d ${CERT_DIR} ] && mkdir -p ${CERT_DIR}
+[ ! -f ${CERT_DIR}/privkey.pem ] && /gencert.sh "${CERT_DIR}"
+
+CERT=${CERT_DIR}/fullchain.pem
+KEY=${CERT_DIR}/privkey.pem
 # valid for three years
 DAYS=1095
-
-mkdir -p $DIR
 
 #SSLEAY=/tmp/exim.ssleay.$$.cnf
 SSLEAY="$(tempfile -m600 -pexi)"
@@ -23,8 +25,8 @@ stateOrProvinceName = NoWhere
 localityName = IvryUr
 organizationName = MyCorp
 organizationalUnitName = MyOU
-commonName = noservername.domain.tld
-emailAddress = notme@noservername.domain.tld
+commonName = ${FQDN_MAIL}
+emailAddress = notme@${FQDN_MAIL}
 EOM
 
 echo "[*] Creating a self signed SSL certificate for Exim!"
