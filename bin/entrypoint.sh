@@ -3,7 +3,6 @@
 FQDN_MAIL=${FQDN_MAIL:-noservername.domain.tld}
 CERT_DIR="/etc/letsencrypt/live/${FQDN_MAIL}"
 LOGDIR="/var/log/exim4"
-CERTDIR=
 
 [ ! -d ${LOGDIR} ] && mkdir -p ${LOGDIR}
 [ ! -d ${CERT_DIR} ] && mkdir -p ${CERT_DIR}
