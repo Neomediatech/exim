@@ -1,6 +1,10 @@
 #
 #
 #    INCOMPLETE (as of 24 dec 2019)
+#    - neomediatech/exim-ubuntu:latest doen not exists, yet
+#    - mail_db and webmail_db needs to be completed
+#    - also cron need to be completed
+#    - documentation about configs, env vars, requirements, etc...
 #
 # docker compose swarm template for Portainer
 # this docker compose yaml named "email-stack-4-swarm-ubuntu.yml"
