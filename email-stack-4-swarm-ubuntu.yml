@@ -1,0 +1,327 @@
+#
+#
+#    INCOMPLETE (as of 24 dec 2019)
+#
+# docker compose swarm template for Portainer
+# this docker compose yaml named "email-stack-4-swarm-ubuntu.yml"
+# STACK_BASE_PATH [base folder where to host files, must exists]
+# STACK_BASE_PATH=/srv/data/docker/containers/email ; grep device email-stack-4-swarm-ubuntu.yml|grep -v "#"|awk '{print $2}'|while read dir; do eval mkdir -p $dir; done
+# FQDN_MAIL server name to which create certificate, eg: mail.mydomain.tld, or noservername.domain.tld.
+#
+# 
+# echo "db_root_password" > ${STACK_BASE_PATH}/db/data/db-root.pwd
+# echo "db_user_password" > ${STACK_BASE_PATH}/db/data/db-user.pwd
+# echo "db_user_name" > ${STACK_BASE_PATH}/db/data/db-user.txt
+# echo "db_name" > ${STACK_BASE_PATH}/db/data/db-name.txt
+
+version: '3.7'
+
+x-default-opts: 
+  &default-opts
+  deploy:
+    restart_policy:
+      condition: on-failure
+      delay: 5s
+      #max_attempts: 3
+      window: 20s
+
+x-vol-tz: &v-tz /etc/timezone:/etc/timezone:ro
+x-vol-ltime: &v-ltime /etc/localtime:/etc/localtime:ro
+x-vol-lgen: &v-lgen /etc/locale.gen:/etc/locale.gen:ro
+x-vols: &vols
+  - *v-tz
+  - *v-ltime
+  - *v-lgen
+
+services:
+  exim:
+    image: neomediatech/exim-ubuntu:latest
+    hostname: exim
+    <<: *default-opts    
+    ports:
+      - target: 25
+        published: 25
+        protocol: tcp
+        mode: host
+      - target: 465
+        published: 465
+        protocol: tcp
+        mode: host
+      - target: 587
+        published: 587
+        protocol: tcp
+        mode: host
+    volumes:
+      - *v-tz
+      - *v-ltime
+      - *v-lgen
+      - mailbox_homes:/var/spool/virtual
+      - logs:/var/log/exim4
+      - certs:/etc/letsencrypt/live/${FQDN_MAIL:-noservername.domain.tld}
+      - exim_spool:/var/spool/exim4
+      - exim_confs:/etc/exim4
+      - ${STACK_BASE_PATH}/clamav/clamd.sock:/run/clamav/clamd.ctl
+    environment:
+      WAITFOR: "dovecot:dovecot clamav:clamav redis:redis rspamd:rspamd"
+    depends_on:
+      - clamav
+      - redis
+      - rspamd
+
+  clamav:
+    image: neomediatech/clamav-ubuntu:latest
+    hostname: clamav
+    <<: *default-opts    
+    deploy:
+      restart_policy:
+        condition: any
+        delay: 5s
+        #max_attempts: 3
+        window: 20s    
+    volumes:
+      - *v-tz
+      - *v-ltime
+      - *v-lgen
+      - ${STACK_BASE_PATH}/clamav/clamd.sock:/run/clamav/clamd.ctl
+      - clamav_defs:/var/lib/clamav
+    stop_grace_period: 1m
+
+  rspamd:
+    image: neomediatech/rspamd-alpine:latest
+    hostname: rspamd
+    <<: *default-opts    
+    ports:
+      - target: 11334
+        published: 11334
+        protocol: tcp
+        mode: host
+    volumes:
+      - *v-tz
+      - *v-ltime
+      - *v-lgen
+      - ${STACK_BASE_PATH}/rspamd/conf/worker-controller.inc:/etc/rspamd/local.d/worker-controller.inc:ro
+      - ${STACK_BASE_PATH}/rspamd/conf/rspamd.conf.local:/etc/rspamd/rspamd.conf.local:ro
+      - rspamd_data:/var/lib/rspamd
+      - logs:/var/log/rspamd
+    environment:
+      WAITFOR: clamav:clamav
+    depends_on:
+      - redis
+      - clamav
+    stop_grace_period: 1m
+    #command: "/bin/sh -c 'echo -n \"Waiting for clamav...\"; until echo PING | nc clamav 3310 2>/dev/null; do sleep 1; echo -n \"...\"; done; echo \"OK\"; /init.sh'"
+
+  dcc:
+    image: neomediatech/dcc:latest
+    hostname: dcc
+    <<: *default-opts 
+    volumes: *vols
+
+  razor:
+    image: neomediatech/razor:latest
+    hostname: razor
+    <<: *default-opts
+    ports:
+      - target: 9192
+        published: 9192
+        protocol: tcp
+        mode: host
+    volumes: *vols
+
+  pyzor:
+    image: neomediatech/pyzor:latest
+    hostname: pyzor
+    <<: *default-opts
+    ports:
+      - target: 5953
+        published: 5953
+        protocol: tcp
+        mode: host
+    volumes: *vols
+
+  redis:
+    image: redis:5-alpine
+    hostname: redis
+    <<: *default-opts    
+    environment:
+      TZ: Europe/Rome
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - *v-tz
+      - *v-ltime
+      - *v-lgen
+      - redis_db:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 10s
+      retries: 3
+    # according to https://github.com/moby/moby/pull/37701#issuecomment-448014841
+    # on docker 19.03 you will be able to set /proc/sys/net/core/somaxconn to 511 instead of default 128
+    # like this example below (maybe syntax will change)
+    #sysctls:
+    #  - net.core.somaxconn=511
+    stop_grace_period: 1m
+
+  db:
+    image: mariadb:10.4
+    hostname: mail_db
+    <<: *default-opts    
+    volumes:
+      - *v-tz
+      - *v-ltime
+      - *v-lgen
+      - mail_db:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD_FILE: /var/lib/mysql/db-root.pwd
+      MYSQL_PASSWORD_FILE: /var/lib/mysql/db-webmail.pwd
+      MYSQL_DATABASE_FILE: /var/lib/mysql/db-name.txt
+      MYSQL_USER_FILE: /var/lib/mysql/db-user.txt
+    healthcheck:
+      test: ["CMD", "/bin/bash", "-c", "read p < $$MYSQL_PASSWORD_FILE ; read u < $$MYSQL_USER_FILE ; mysql -p$$p -u$$u -e status | grep Uptime || (echo \"MariaDB is down\" && exit 1)"]
+      interval: 30s
+      timeout: 30s
+      start_period: 5s
+      retries: 20
+
+  webmail_db:
+    image: mariadb:10.4
+    hostname: webmail_db
+    <<: *default-opts    
+    volumes:
+      - *v-tz
+      - *v-ltime
+      - *v-lgen
+      - webmail_db:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD_FILE: /var/lib/mysql/db-root.pwd
+      MYSQL_PASSWORD_FILE: /var/lib/mysql/db-webmail.pwd
+      MYSQL_DATABASE_FILE: /var/lib/mysql/db-name.txt
+      MYSQL_USER_FILE: /var/lib/mysql/db-user.txt
+    healthcheck:
+      test: ["CMD", "/bin/bash", "-c", "read p < $$MYSQL_PASSWORD_FILE ; read u < $$MYSQL_USER_FILE ; mysql -p$$p -u$$u -e status | grep Uptime || (echo \"MariaDB is down\" && exit 1)"]
+      interval: 30s
+      timeout: 30s
+      start_period: 5s
+      retries: 20
+
+  pma:
+    image: phpmyadmin/phpmyadmin
+    hostname: phpmyadmin
+    <<: *default-opts
+    environment:
+      PMA_HOST: webmail_db
+      PMA_PORT: 3306
+    ports:
+      - '8280:80'
+    volumes: *vols
+    depends_on:
+      - db
+
+  certbot:
+    image: certbot/certbot
+    hostname: certbot
+    <<: *default-opts    
+    volumes:
+      - *v-tz
+      - *v-ltime
+      - *v-lgen
+      - certs:/etc/letsencrypt
+      - certbot_deals:/var/www/certbot
+      - certbot_var:/var/lib/letsencrypt
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 23h & wait $${!}; done;'"
+
+  cron:
+    image: neomediatech/cron
+    hostname: cron
+    environment:
+      << : *common-vars
+    networks:
+      - private
+    volumes:
+      - crontabs:/var/spool/cron/crontabs
+      - cron_scripts:/scripts
+    depends_on:
+      - db
+
+volumes:
+  clamav_defs:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${STACK_BASE_PATH}/clamav/defs
+  redis_db:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${STACK_BASE_PATH}/redis/db
+  rspamd_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${STACK_BASE_PATH}/rspamd/var
+  logs:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${STACK_BASE_PATH}/logs
+  mailbox_homes:    
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${STACK_BASE_PATH}/mailboxes/home
+  exim_spool:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${STACK_BASE_PATH}/exim/spool
+  exim_confs:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${STACK_BASE_PATH}/exim/confs
+  mail_db:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${STACK_BASE_PATH}/exim/db
+  webmail_db:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${STACK_BASE_PATH}/webmail/db
+  certs:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${STACK_BASE_PATH}/certbot/conf
+  certbot_deals:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${STACK_BASE_PATH}/certbot/www
+  certbot_var:
+    driver: local
+  crontabs:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${STACK_BASE_PATH}/cron/crontabs
+  cron_scripts:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${STACK_BASE_PATH}/cron/scripts
