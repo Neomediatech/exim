@@ -6,7 +6,7 @@ LOGDIR="/var/log/exim4"
 
 [ ! -d ${LOGDIR} ] && mkdir -p ${LOGDIR}
 [ ! -d ${CERT_DIR} ] && mkdir -p ${CERT_DIR}
-[ ! -f ${CERT_DIR}/privkey.pem ] && /gencert.sh "${CERT_DIR}"
+[ ! -f ${CERT_DIR}/privkey.pem ] && /gencert.sh 
 
 update-exim4.conf
 
