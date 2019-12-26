@@ -6,6 +6,7 @@
 #    - mail_db and webmail_db needs to be completed
 #    - also cron need to be completed
 #    - documentation about configs, env vars, requirements, etc...
+#    - (clamav seems to be ok, to be checked)
 #
 # docker compose swarm template for Portainer
 # this docker compose yaml named "email-stack-4-swarm-ubuntu.yml"
