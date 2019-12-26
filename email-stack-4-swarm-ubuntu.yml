@@ -65,7 +65,7 @@ services:
       - certs:/etc/letsencrypt/live/${FQDN_MAIL:-noservername.domain.tld}
       - exim_spool:/var/spool/exim4
       - exim_confs:/etc/exim4
-      - ${STACK_BASE_PATH}/clamav/clamd.sock:/run/clamav/clamd.ctl
+      - ${STACK_BASE_PATH}/clamav/:/run/clamav/
     environment:
       WAITFOR: "dovecot:dovecot clamav:clamav redis:redis rspamd:rspamd"
     depends_on:
@@ -87,7 +87,7 @@ services:
       - *v-tz
       - *v-ltime
       - *v-lgen
-      - ${STACK_BASE_PATH}/clamav/clamd.sock:/run/clamav/clamd.ctl
+      - ${STACK_BASE_PATH}/clamav/:/run/clamav/
       - clamav_defs:/var/lib/clamav
     stop_grace_period: 1m
 
@@ -104,8 +104,7 @@ services:
       - *v-tz
       - *v-ltime
       - *v-lgen
-      - ${STACK_BASE_PATH}/rspamd/conf/worker-controller.inc:/etc/rspamd/local.d/worker-controller.inc:ro
-      - ${STACK_BASE_PATH}/rspamd/conf/rspamd.conf.local:/etc/rspamd/rspamd.conf.local:ro
+      - ${STACK_BASE_PATH}/rspamd/conf/:/etc/rspamd/local.d/
       - rspamd_data:/var/lib/rspamd
       - logs:/var/log/rspamd
     environment:
@@ -114,7 +113,6 @@ services:
       - redis
       - clamav
     stop_grace_period: 1m
-    #command: "/bin/sh -c 'echo -n \"Waiting for clamav...\"; until echo PING | nc clamav 3310 2>/dev/null; do sleep 1; echo -n \"...\"; done; echo \"OK\"; /init.sh'"
 
   dcc:
     image: neomediatech/dcc:latest
