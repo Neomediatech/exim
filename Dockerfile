@@ -27,20 +27,3 @@ EXPOSE 25 465 587
       
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["/tini","--","/usr/sbin/exim4","-bd","-q1m"]
-
-# volumes:
-# /etc/timezone:/etc/timezone:ro
-# /etc/localtime:/etc/localtime:ro
-# /etc/locale.gen:/etc/locale.gen:ro
-
-
-# container clamav con i pacchetti zip unzip rar unrar unace bzip2 gzip
-# container con db mysql
-# container rspamd
-# container razor
-# container pyzor
-# container redis
-# container dcc
-# container certbot per certificato ssl per sessioni smtp (container traefik?)
-#
-# fail2ban, dnsbl-ipset.sh, cron
