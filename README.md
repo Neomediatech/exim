@@ -9,6 +9,9 @@ This image ~~is~~ will be heavily dependent on a complex docker stack, including
 * redis
 * dcc
 * certbot (for smtp sessions and webmail (maybe with traefik?))
+* fail2ban
+* dnsbl-ipset.sh
+* cron
 
 Because of very customized and critical settings, all Exim config files are bind mounted on host in /etc/exim4/. May be we'll publish them in future, but for now they remains hidden.  
 
