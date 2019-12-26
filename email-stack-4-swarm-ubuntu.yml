@@ -238,8 +238,6 @@ services:
   cron:
     image: neomediatech/cron
     hostname: cron
-    networks:
-      - private
     volumes:
       - *v-tz
       - *v-ltime
