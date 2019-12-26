@@ -121,7 +121,7 @@ services:
     volumes: *vols
 
   razor:
-    image: neomediatech/razor:latest
+    image: neomediatech/razor-ubuntu:latest
     hostname: razor
     <<: *default-opts
     volumes: *vols
