@@ -1,7 +1,8 @@
 #
 #
 #    INCOMPLETE (as of 24 dec 2019)
-#    - neomediatech/exim-ubuntu:latest doen not exists, yet
+#    - neomediatech/exim-ubuntu:latest doesn't exists, yet
+#    - neomediatech/rspamd-ubuntu:latest doesn't exists, yet
 #    - mail_db and webmail_db needs to be completed
 #    - also cron need to be completed
 #    - documentation about configs, env vars, requirements, etc...
@@ -91,7 +92,7 @@ services:
     stop_grace_period: 1m
 
   rspamd:
-    image: neomediatech/rspamd-alpine:latest
+    image: neomediatech/rspamd-ubuntu:latest
     hostname: rspamd
     <<: *default-opts    
     ports:
