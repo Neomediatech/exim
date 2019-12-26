@@ -149,8 +149,6 @@ services:
     image: redis:5-alpine
     hostname: redis
     <<: *default-opts    
-    environment:
-      TZ: Europe/Rome
     command: ["redis-server", "--appendonly", "yes"]
     volumes:
       - *v-tz
@@ -240,11 +238,12 @@ services:
   cron:
     image: neomediatech/cron
     hostname: cron
-    environment:
-      << : *common-vars
     networks:
       - private
     volumes:
+      - *v-tz
+      - *v-ltime
+      - *v-lgen
       - crontabs:/var/spool/cron/crontabs
       - cron_scripts:/scripts
     depends_on:
