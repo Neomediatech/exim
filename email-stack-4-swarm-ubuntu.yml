@@ -65,7 +65,6 @@ services:
       - certs:/etc/letsencrypt/live/${FQDN_MAIL:-noservername.domain.tld}
       - exim_spool:/var/spool/exim4
       - exim_confs:/etc/exim4
-      - ${STACK_BASE_PATH}/clamav/:/run/clamav/
     environment:
       WAITFOR: "dovecot:dovecot clamav:clamav redis:redis rspamd:rspamd"
     depends_on:
@@ -107,6 +106,7 @@ services:
       - ${STACK_BASE_PATH}/rspamd/conf/:/etc/rspamd/local.d/
       - rspamd_data:/var/lib/rspamd
       - logs:/var/log/rspamd
+      - ${STACK_BASE_PATH}/clamav/:/run/clamav/
     environment:
       WAITFOR: clamav:clamav
     depends_on:
