@@ -165,7 +165,7 @@ services:
       - mail_db:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD_FILE: /var/lib/mysql/db-root.pwd
-      MYSQL_PASSWORD_FILE: /var/lib/mysql/db-webmail.pwd
+      MYSQL_PASSWORD_FILE: /var/lib/mysql/db-user.pwd
       MYSQL_DATABASE_FILE: /var/lib/mysql/db-name.txt
       MYSQL_USER_FILE: /var/lib/mysql/db-user.txt
     healthcheck:
