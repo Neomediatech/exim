@@ -1,7 +1,7 @@
 #
 #
 #    INCOMPLETE (as of 24 dec 2019)
-#    - neomediatech/rspamd-ubuntu:latest doesn't exists, yet
+#    - neomediatech/rspamd-ubuntu:latest built but need production tests
 #    - mail_db and webmail_db needs to be completed
 #    - also cron need to be completed
 #    - documentation about configs, env vars, requirements, etc...
