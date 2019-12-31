@@ -21,7 +21,10 @@ fi
 [ ! -f ${CERT_DIR}/privkey.pem ] && /gencert.sh 
 
 if [ ! -d /proc/sys/net/ipv6 ]; then 
-    echo 'disable_ipv6 = true' > /etc/exim4/conf.d/main/01_custom
+    grep -q disable_ipv6 /etc/exim4/* -R
+    if [ $? -ne 0 ]; then
+        echo 'disable_ipv6 = true' > /etc/exim4/conf.d/main/01_custom
+    fi
 fi
 
 update-exim4.conf
