@@ -86,7 +86,7 @@ services:
       - *v-tz
       - *v-ltime
       - *v-lgen
-      - ${STACK_BASE_PATH}/clamav/:/run/clamav/
+      - clamav_pid:/run/clamav/
       - clamav_defs:/var/lib/clamav
     stop_grace_period: 1m
 
@@ -103,10 +103,10 @@ services:
       - *v-tz
       - *v-ltime
       - *v-lgen
-      - ${STACK_BASE_PATH}/rspamd/conf/:/etc/rspamd/local.d/
+      - rspamd_conf:/etc/rspamd/local.d
       - rspamd_data:/var/lib/rspamd
       - logs:/var/log/rspamd
-      - ${STACK_BASE_PATH}/clamav/:/run/clamav/
+      - clamav_pid:/run/clamav/
     environment:
       WAITFOR: clamav:clamav
     depends_on:
@@ -207,6 +207,12 @@ volumes:
       type: none
       o: bind
       device: ${STACK_BASE_PATH}/clamav/defs
+  clamav_pid:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${STACK_BASE_PATH}/clamav/pid
   redis_db:
     driver: local
     driver_opts:
@@ -219,6 +225,12 @@ volumes:
       type: none
       o: bind
       device: ${STACK_BASE_PATH}/rspamd/var
+  rspamd_conf:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${STACK_BASE_PATH}/rspamd/conf
   logs:
     driver: local
     driver_opts:
