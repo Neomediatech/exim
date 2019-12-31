@@ -3,7 +3,6 @@ FQDN_MAIL=${FQDN_MAIL:-noservername.domain.tld}
 CERT_DIR="${FQDN_MAIL:-/etc/letsencrypt/live/${FQDN_MAIL}}"
 
 [ ! -d ${CERT_DIR} ] && mkdir -p ${CERT_DIR}
-[ ! -f ${CERT_DIR}/privkey.pem ] && /gencert.sh "${CERT_DIR}"
 
 CERT=${CERT_DIR}/fullchain.pem
 KEY=${CERT_DIR}/privkey.pem
