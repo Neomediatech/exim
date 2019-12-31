@@ -107,8 +107,6 @@ services:
       - rspamd_data:/var/lib/rspamd
       - logs:/var/log/rspamd
       - clamav_pid:/run/clamav/
-    environment:
-      WAITFOR: clamav:clamav
     depends_on:
       - redis
       - clamav
