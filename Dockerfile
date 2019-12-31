@@ -2,7 +2,6 @@ FROM neomediatech/ubuntu-base
 
 ENV VERSION=4.90.1-1ubuntu1.4 \
     DEBIAN_FRONTEND=noninteractive \
-    TZ=Europe/Rome \
     SERVICE=exim-ubuntu
 
 LABEL maintainer="docker-dario@neomediatech.it" \ 
@@ -11,13 +10,14 @@ LABEL maintainer="docker-dario@neomediatech.it" \
       org.label-schema.vcs-url=https://github.com/Neomediatech/${SERVICE} \
       org.label-schema.maintainer=Neomediatech
 
-COPY bin/* /
-
 RUN apt-get update && apt-get -y dist-upgrade && \
-    apt-get install -y mariadb-client exim4-daemon-heavy libswitch-perl redis-tools openssl && \
+    apt-get install -y --no-install-recommends mariadb-client exim4-daemon-heavy libswitch-perl redis-tools openssl && \
     rm -rf /var/lib/apt/lists* && \
-    useradd -u 5000 -U -s /bin/false -m -d /var/spool/virtual vmail && \
-    chmod +x /entrypoint.sh /gencert.sh 
+    useradd -u 5000 -U -s /bin/false -m -d /var/spool/virtual vmail 
+
+COPY bin/* /
+RUN chmod +x /entrypoint.sh /gencert.sh /init.sh
+RUN /init.sh
 
 EXPOSE 25 465 587
 
