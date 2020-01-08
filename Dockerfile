@@ -1,4 +1,4 @@
-FROM neomediatech/ubuntu-base
+FROM neomediatech/ubuntu-base:latest
 
 ENV VERSION=4.90.1-1ubuntu1.4 \
     DEBIAN_FRONTEND=noninteractive \
