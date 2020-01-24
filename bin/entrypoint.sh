@@ -17,6 +17,23 @@ if [ ! -f "${LOGDIR}/mainlog" ]; then
     chmod 640 "${LOGDIR}/mainlog"
 fi
 
+# Check custom configuration files
+SRC_DIR="/data"
+DST_DIR="/etc/exim4"
+cd "$SRC_DIR"
+for FILE in $(find . -type f|cut -b 3-); do
+  DIR_FILE="$(dirname "$FILE")"
+  if [ ! -d "$DST_DIR/$DIR_FILE" ]; then
+    mkdir -p "$DST_DIR/$DIR_FILE"
+  fi
+  if [ -f "$DST_DIR/$FILE}" ]; then
+    echo "  WARNING: $DST_DIR/$FILE already exists and will be overriden"
+    rm -f "$DST_DIR/$FILE"
+  fi
+  echo "  Add custom config file $DST_DIR/$FILE ..."
+  ln -sf "$SRC_DIR/$FILE" "$DST_DIR/$FILE"
+done
+
 [ ! -d ${CERT_DIR} ] && mkdir -p ${CERT_DIR}
 [ ! -f ${CERT_DIR}/privkey.pem ] && /gencert.sh 
 
