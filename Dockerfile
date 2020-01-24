@@ -1,7 +1,7 @@
 FROM neomediatech/ubuntu-base:latest
 
 ENV VERSION=4.90.1-1ubuntu1.4 \
-    SERVICE=exim-ubuntu
+    SERVICE=exim
 
 LABEL maintainer="docker-dario@neomediatech.it" \ 
       org.label-schema.version=$VERSION \
