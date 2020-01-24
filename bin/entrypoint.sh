@@ -48,5 +48,5 @@ fi
 
 update-exim4.conf
 
-exec tail -f ${LOGDIR}/mainlog &
+exec tail -F ${LOGDIR}/mainlog &
 exec "$@"
