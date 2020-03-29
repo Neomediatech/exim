@@ -10,8 +10,9 @@ if [ "$HONEYPOT" == "false" ]; then
     mkdir -p /var/log/exim4
     rm -f /var/log/exim4/{mainlog,rejectlog,paniclog}
     ln -s /dev/stdout /var/log/exim4/mainlog
-    ln -s /dev/stdout /var/log/exim4/rejectlog
-    ln -s /dev/stdout /var/log/exim4/paniclog
+    ln -s /dev/stderr /var/log/exim4/rejectlog
+    ln -s /dev/stderr /var/log/exim4/paniclog
+    echo 'log_file_path = syslog' > /etc/exim4/conf.d/main/02_custom
   else
     if [ ! -d "${LOGDIR}" ]; then
       mkdir -p "${LOGDIR}"
