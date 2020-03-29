@@ -2,19 +2,30 @@
 
 FQDN_MAIL=${FQDN_MAIL:-noservername.domain.tld}
 CERT_DIR="/etc/letsencrypt/live/${FQDN_MAIL}"
-LOGDIR="/var/log/exim4"
+LOGDIR=${LOGDIR:-/var/log/exim4}
+HONEYPOT=${HONEYPOT:-false}
 
-if [ ! -d "${LOGDIR}" ]; then
-    mkdir -p "${LOGDIR}"
-    chown Debian-exim:adm "${LOGDIR}"
-    chmod 750 "${LOGDIR}"
-    chmod g+s "${LOGDIR}"
-fi
+if [ "$HONEYPOT" == "false" ]; then
+  if [ "$LOGDIR" == "stdout" ]; then
+    mkdir -p /var/log/exim4
+    rm -f /var/log/exim4/{mainlog,rejectlog,paniclog}
+    ln -s /dev/stdout /var/log/exim4/mainlog
+    ln -s /dev/stdout /var/log/exim4/rejectlog
+    ln -s /dev/stdout /var/log/exim4/paniclog
+  else
+    if [ ! -d "${LOGDIR}" ]; then
+      mkdir -p "${LOGDIR}"
+      chown Debian-exim:adm "${LOGDIR}"
+      chmod 750 "${LOGDIR}"
+      chmod g+s "${LOGDIR}"
+    fi
 
-if [ ! -f "${LOGDIR}/mainlog" ]; then
-    touch "${LOGDIR}/mainlog"
-    chown Debian-exim:adm "${LOGDIR}/mainlog"
-    chmod 640 "${LOGDIR}/mainlog"
+    if [ ! -f "${LOGDIR}/mainlog" ]; then
+      touch "${LOGDIR}/mainlog"
+      chown Debian-exim:adm "${LOGDIR}/mainlog"
+      chmod 640 "${LOGDIR}/mainlog"
+    fi
+  fi
 fi
 
 # Check custom configuration files
@@ -48,5 +59,7 @@ fi
 
 update-exim4.conf
 
-exec tail -F ${LOGDIR}/mainlog &
+if [ "$LOGDIR" != "stdout" ]; then
+  exec tail -F ${LOGDIR}/mainlog &
+fi
 exec "$@"
