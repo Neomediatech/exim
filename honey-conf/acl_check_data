@@ -1,3 +1,9 @@
+# some logging from rats
+warn
+    condition = ${if !def:h_Message-ID: {1}}
+    message = Message-ID: <E$message_id@$primary_hostname>
+    logwrite  = HOST=[$sender_host_address] ($sender_fullhost), FROM=$sender_address <$return_path>, TO=$recipients, SUBJECT=$h_subject:
+
 # no matter if email is good or bad, we are a honeypot and no real delivery will happen
 deny
     message  = Sorry, unable to relay. Please try again later.
