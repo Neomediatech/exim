@@ -1,0 +1,15 @@
+# allows a client to use the SMTP AUTH command even when it has not been advertised in response to EHLO.
+# we try to catch all possible rats
+warn
+        logwrite = START SESSION:   incoming connection from $sender_fullhost
+        control = allow_auth_unadvertised
+
+warn
+        dnslists = zen.spamhaus.org
+        logwrite = $sender_host_address . ZEN says: $dnslist_domain ($dnslist_text), $dnslist_value
+
+# very bad rats, they have already been judged...
+deny
+        message  = You are DROP/EDROP. See https://www.spamhaus.org/query/ip/$sender_host_address at $dnslist_domain
+        dnslists = zen.spamhaus.org=127.0.0.9
+        logwrite = DROP-EDROP: $sender_host_address is in $dnslist_domain ($dnslist_text), $dnslist_value
