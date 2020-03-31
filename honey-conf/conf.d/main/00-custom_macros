@@ -1,3 +1,4 @@
+CONFDIR               = /etc/exim4
 acl_smtp_connect      = CONFDIR/acl_smtp_connect
 MAIN_ACL_CHECK_RCPT   = CONFDIR/acl_check_rcpt
 MAIN_ACL_CHECK_DATA   = CONFDIR/acl_check_data
