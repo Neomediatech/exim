@@ -4,12 +4,17 @@ warn
         logwrite = START SESSION:   incoming connection from $sender_fullhost
         control = allow_auth_unadvertised
 
-warn
-        dnslists = zen.spamhaus.org
-        logwrite = $sender_host_address . ZEN says: $dnslist_domain ($dnslist_text), $dnslist_value
-
 # very bad rats, they have already been judged...
 deny
         message  = You are DROP/EDROP. See https://www.spamhaus.org/query/ip/$sender_host_address at $dnslist_domain
         dnslists = zen.spamhaus.org=127.0.0.9
         logwrite = DROP-EDROP: $sender_host_address is in $dnslist_domain ($dnslist_text), $dnslist_value
+
+warn
+        dnslists = zen.spamhaus.org
+        logwrite = $sender_host_address . ZEN says: $dnslist_domain ($dnslist_text), $dnslist_value
+
+warn
+        !hosts                      = 127.0.0.0/8 : 10.0.0.0/8 : 172.16.0.0/12 : 192.168.0.0/16
+        dnslists                    = cbl.abuseat.org
+        logwrite  = WARNING: [$sender_host_address] found in $dnslist_domain ($dnslist_text).
