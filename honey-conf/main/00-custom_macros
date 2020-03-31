@@ -1,1 +1,2 @@
+acl_smtp_connect      = CONFDIR/acl_smtp_connect
 MAIN_ACL_CHECK_DATA   = CONFDIR/acl_check_data
