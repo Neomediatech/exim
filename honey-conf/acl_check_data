@@ -1,5 +1,5 @@
 # no matter if email is good or bad, we are a honeypot and no real delivery will happen
-warn
-    control   = fakereject/Sorry, unable to relay. Please try again later.
+deny
+    message  = Sorry, unable to relay. Please try again later.
 
 accept
