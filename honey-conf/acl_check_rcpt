@@ -1,1 +1,4 @@
 
+
+# ignore every check in standard exim config, as we want to ingest every connections from rats
+accept
