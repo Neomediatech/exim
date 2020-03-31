@@ -1,0 +1,18 @@
+# "server_condition = true" make auth pass everyone (dangerous, do it if you know what you are doing)
+# this way you can reject rats after other check (for example on rcpt or after)
+# "server_advertise_condition = false" is the safest way to log attempts, but rejecting them
+fake_plain:
+	driver = plaintext
+	public_name = PLAIN
+	server_condition = false
+	server_set_id = $auth2
+	server_prompts = :
+  server_advertise_condition = false
+
+fake_login:
+	driver = plaintext
+	public_name = LOGIN
+	server_prompts = "Username:: : Password::"
+	server_condition = false
+	server_set_id = $auth1
+  server_advertise_condition = false
