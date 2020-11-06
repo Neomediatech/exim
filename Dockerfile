@@ -1,6 +1,6 @@
-FROM neomediatech/ubuntu-base:latest
+FROM neomediatech/ubuntu-base:20.04
 
-ENV VERSION=4.90.1-1ubuntu1.4 \
+ENV VERSION=4.93-13ubuntu1.1 \
     SERVICE=exim
 
 LABEL maintainer="docker-dario@neomediatech.it" \ 
