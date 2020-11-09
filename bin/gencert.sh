@@ -1,6 +1,6 @@
 #!/bin/sh -e
 MAILSERVER_CERT=${MAILSERVER_CERT:-noservername.domain.tld}
-CERT_DIR="${FQDN_MAIL:-/etc/letsencrypt/live/${MAILSERVER_CERT}}"
+CERT_DIR="${CERT_DIR:-/data/certs/live/${MAILSERVER_CERT}}"
 
 [ ! -d ${CERT_DIR} ] && mkdir -p ${CERT_DIR}
 
