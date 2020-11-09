@@ -1,7 +1,7 @@
 #!/bin/bash
 
 MAILSERVER_CERT=${MAILSERVER_CERT:-noservername.domain.tld}
-CERT_DIR="/etc/letsencrypt/live/${MAILSERVER_CERT}"
+CERT_DIR="/data/certs/live/${MAILSERVER_CERT}"
 LOGDIR=${LOGDIR:-/var/log/exim4}
 HONEYPOT=${HONEYPOT:-false}
 
@@ -51,7 +51,12 @@ fi
 # exim does not accept exim4.filter as symbolic link, hence we copy it
 [ -f ${SRC_DIR}/exim4.filter ] && rm -f /etc/exim4/exim4.filter && cp ${SRC_DIR}/exim4.filter /etc/exim4
 
-[ ! -d ${CERT_DIR} ] && mkdir -p ${CERT_DIR}
+if [ -d ${CERT_DIR} ]; then
+    sed -i "s/^SERVER_CERT.*$/SERVER_CERT=$MAILSERVER_CERT/" /etc/exim4/conf.d/main/00_exim4-config_listmacrosdefs-custom
+    [ -d /data/certs/archive/$MAILSERVER_CERT ] && chmod 644 /data/certs/archive/$MAILSERVER_CERT/privkey*.pem
+else
+    mkdir -p ${CERT_DIR}
+fi
 [ ! -f ${CERT_DIR}/privkey.pem ] && /gencert.sh 
 
 if [ ! -d /proc/sys/net/ipv6 ]; then 
