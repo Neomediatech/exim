@@ -1,6 +1,6 @@
 #!/bin/sh -e
-FQDN_MAIL=${FQDN_MAIL:-noservername.domain.tld}
-CERT_DIR="${FQDN_MAIL:-/etc/letsencrypt/live/${FQDN_MAIL}}"
+MAILSERVER_CERT=${MAILSERVER_CERT:-noservername.domain.tld}
+CERT_DIR="${FQDN_MAIL:-/etc/letsencrypt/live/${MAILSERVER_CERT}}"
 
 [ ! -d ${CERT_DIR} ] && mkdir -p ${CERT_DIR}
 
@@ -24,8 +24,8 @@ stateOrProvinceName = NoWhere
 localityName = IvryUr
 organizationName = MyCorp
 organizationalUnitName = MyOU
-commonName = ${FQDN_MAIL}
-emailAddress = notme@${FQDN_MAIL}
+commonName = ${MAILSERVER_CERT}
+emailAddress = notme@${MAILSERVER_CERT}
 EOM
 
 echo "[*] Creating a self signed SSL certificate for Exim!"
