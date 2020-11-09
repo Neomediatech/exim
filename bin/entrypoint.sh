@@ -60,6 +60,18 @@ fi
 
 update-exim4.conf
 
+cmd="/dockerize"
+if [ -x "$cmd" ]; then
+  checks=""
+  if [ -n "$WAITFOR" ]; then
+    for CHECK in $WAITFOR; do
+      checks="$checks -wait $CHECK"
+    done
+    $cmd $checks -timeout 180s -wait-retry-interval 15s
+    [ $? -ne 0 ] && exit 1
+  fi
+fi
+
 if [ "$LOGDIR" != "stdout" ]; then
   exec tail -F ${LOGDIR}/mainlog &
 fi
