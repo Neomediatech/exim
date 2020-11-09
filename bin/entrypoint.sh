@@ -48,6 +48,9 @@ if [ -d "${SRC_DIR}" ]; then
   done
 fi
 
+# exim does not accept exim4.filter as symbolic link, hence we copy it
+[ -f ${SRC_DIR}/exim4.filter ] && rm -f /etc/exim4/exim4.filter && cp ${SRC_DIR}/exim4.filter /etc/exim4
+
 [ ! -d ${CERT_DIR} ] && mkdir -p ${CERT_DIR}
 [ ! -f ${CERT_DIR}/privkey.pem ] && /gencert.sh 
 
