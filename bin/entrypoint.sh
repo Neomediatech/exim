@@ -1,7 +1,7 @@
 #!/bin/bash
 
-FQDN_MAIL=${FQDN_MAIL:-noservername.domain.tld}
-CERT_DIR="/etc/letsencrypt/live/${FQDN_MAIL}"
+MAILSERVER_CERT=${MAILSERVER_CERT:-noservername.domain.tld}
+CERT_DIR="/etc/letsencrypt/live/${MAILSERVER_CERT}"
 LOGDIR=${LOGDIR:-/var/log/exim4}
 HONEYPOT=${HONEYPOT:-false}
 
