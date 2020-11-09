@@ -30,7 +30,7 @@ if [ "$HONEYPOT" == "false" ]; then
 fi
 
 # Check custom configuration files
-SRC_DIR="/data"
+SRC_DIR="/data/conf"
 DST_DIR="/etc/exim4"
 if [ -d "${SRC_DIR}" ]; then
   cd "${SRC_DIR}"
