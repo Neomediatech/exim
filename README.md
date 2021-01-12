@@ -19,6 +19,11 @@ Because of very customized and critical settings, all Exim config files are bind
 
 
 # WARNING
-Nothing is workink here, for now.
+Nothing is working here, for now.
 
 Bad things can happens. YHBW
+
+## Environment Variables
+| Name                | Description                                            | Default         |
+| ------------------- | ------------------------------------------------------ | --------------- |
+| EXIM_LOGDIR         | Path for Exim logfiles                                 | /var/log/exim4/ |
