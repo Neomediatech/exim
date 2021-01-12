@@ -2,7 +2,7 @@
 
 MAILSERVER_CERT=${MAILSERVER_CERT:-noservername.domain.tld}
 CERT_DIR="/data/certs/live/${MAILSERVER_CERT}"
-LOGDIR=${LOGDIR:-/var/log/exim4}
+LOGDIR=${EXIM_LOGDIR:-/var/log/exim4}
 HONEYPOT=${HONEYPOT:-false}
 
 if [ "$HONEYPOT" == "false" ]; then
