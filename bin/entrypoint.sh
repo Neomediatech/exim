@@ -51,6 +51,10 @@ fi
 # exim does not accept exim4.filter as symbolic link, hence we copy it
 [ -f ${SRC_DIR}/exim4.filter ] && rm -f /etc/exim4/exim4.filter && cp ${SRC_DIR}/exim4.filter /etc/exim4
 
+if [ -f /run/secrets/dovecot-fqdn-cert.txt ]; then
+    MAILSERVER_CERT="$(cat /run/secrets/dovecot-fqdn-cert.txt)"
+fi
+
 if [ -d ${CERT_DIR} ]; then
     sed -i "s/^SERVER_CERT.*$/SERVER_CERT=$MAILSERVER_CERT/" /etc/exim4/conf.d/main/00_exim4-config_listmacrosdefs-custom
     [ -d /data/certs/archive/$MAILSERVER_CERT ] && chmod 644 /data/certs/archive/$MAILSERVER_CERT/privkey*.pem
