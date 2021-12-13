@@ -12,10 +12,12 @@ LABEL maintainer="docker-dario@neomediatech.it" \
 RUN apt-get update && apt-get -y dist-upgrade && \
     apt-get install -y --no-install-recommends mariadb-client exim4-daemon-heavy libswitch-perl redis-tools openssl && \
     rm -rf /var/lib/apt/lists* && \
-    useradd -u 5000 -U -s /bin/false -m -d /var/spool/virtual vmail 
+    useradd -u 5000 -U -s /bin/false -m -d /var/spool/virtual vmail && \
+    mkdir -p /srv/scripts 
 
+ADD https://raw.githubusercontent.com/Neomediatech/assets/main/scripts/logrotate.sh /srv/scripts/logrotate.sh
 COPY bin/* /
-RUN chmod +x /entrypoint.sh /gencert.sh /init.sh
+RUN chmod +x /entrypoint.sh /gencert.sh /init.sh /srv/scripts/logrotate.sh
 RUN /init.sh
 
 EXPOSE 25 465 587

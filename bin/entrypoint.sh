@@ -26,6 +26,10 @@ if [ "$HONEYPOT" == "false" ]; then
       chown Debian-exim:adm "${LOGDIR}/mainlog"
       chmod 640 "${LOGDIR}/mainlog"
     fi
+
+    if [ -f /srv/scripts/logrotate.sh ]; then
+      /srv/scripts/logrotate.sh "${LOGDIR}"
+    fi
   fi
 fi
 
