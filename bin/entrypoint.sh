@@ -28,7 +28,8 @@ if [ "$HONEYPOT" == "false" ]; then
     fi
 
     if [ -f /srv/scripts/logrotate.sh ]; then
-      /srv/scripts/logrotate.sh "${LOGDIR}"
+      /srv/scripts/logrotate.sh "${LOGDIR}/mainlog"
+      /srv/scripts/logrotate.sh "${LOGDIR}/rejectlog"
     fi
   fi
 fi
