@@ -15,13 +15,13 @@ This image ~~is~~ will be heavily dependent on a complex docker stack, including
 
 Because of very customized and critical settings, all Exim config files are bind mounted on host in /etc/exim4/. May be we'll publish them in future, but for now they remains hidden.  
 
+If you bind-mount your config files on /data/conf container they will be used.  
+The tree of the config files must be the same as they are on /etc/exim4  
+
 (test) docker run --rm -it -v /host-exim-conf/:/etc/exim4/ --name exim-local exim-local
 
-
 # WARNING
-Nothing is working here, for now.
-
-Bad things can happens. YHBW
+Maybe something is not working, use this image with caution, bad things can happens. YHBW  
 
 ## Environment Variables
 | Name                | Description                                            | Default         |
