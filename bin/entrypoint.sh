@@ -92,4 +92,4 @@ fi
 if [ "$LOGDIR" != "stdout" ]; then
   exec tail -F ${LOGDIR}/mainlog &
 fi
-exec "$@"
+exec "$@" $EXIM_OPTIONS

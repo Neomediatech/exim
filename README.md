@@ -15,7 +15,7 @@ This image ~~is~~ will be heavily dependent on a complex docker stack, including
 
 Because of very customized and critical settings, all Exim config files are bind mounted on host in /etc/exim4/. May be we'll publish them in future, but for now they remains hidden.  
 
-If you bind-mount your config files on /data/conf container they will be used.  
+If you bind-mount your config files on /data/exim4/conf container they will be used.  
 The tree of the config files must be the same as they are on /etc/exim4  
 
 (test) docker run --rm -it -v /host-exim-conf/:/etc/exim4/ --name exim-local exim-local
@@ -27,3 +27,4 @@ Maybe something is not working, use this image with caution, bad things can happ
 | Name                | Description                                            | Default         |
 | ------------------- | ------------------------------------------------------ | --------------- |
 | EXIM_LOGDIR         | Path for Exim logfiles                                 | /var/log/exim4/ |
+| EXIM_OPTIONS        | Additional command line options for Exim startup       |                 |
