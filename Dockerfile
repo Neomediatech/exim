@@ -10,7 +10,8 @@ LABEL maintainer="docker-dario@neomediatech.it" \
       org.label-schema.maintainer=Neomediatech
 
 RUN apt-get update && apt-get -y dist-upgrade && \
-    apt-get install -y --no-install-recommends mariadb-client exim4-daemon-heavy libswitch-perl redis-tools openssl && \
+    apt-get install -y --no-install-recommends mariadb-client exim4-daemon-heavy \
+            libswitch-perl redis-tools openssl curl ca-certificates && \
     rm -rf /var/lib/apt/lists* && \
     useradd -u 5000 -U -s /bin/false -m -d /var/spool/virtual vmail && \
     mkdir -p /srv/scripts 
