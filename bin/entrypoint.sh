@@ -4,6 +4,7 @@ MAILSERVER_CERT=${MAILSERVER_CERT:-noservername.domain.tld}
 CERT_DIR="/data/certs/live/${MAILSERVER_CERT}"
 LOGDIR=${EXIM_LOGDIR:-/var/log/exim4}
 HONEYPOT=${HONEYPOT:-false}
+QUEUE_CYCLE=${QUEUE_CYCLE:-1m}
 
 if [ "$HONEYPOT" == "false" ]; then
   if [ "$LOGDIR" == "stdout" ]; then
@@ -92,4 +93,4 @@ fi
 if [ "$LOGDIR" != "stdout" ]; then
   exec tail -F ${LOGDIR}/mainlog &
 fi
-exec "$@" $EXIM_OPTIONS
+exec "$@" "-q$QUEUE_CYCLE" $EXIM_OPTIONS

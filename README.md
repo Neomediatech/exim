@@ -24,7 +24,8 @@ The tree of the config files must be the same as they are on /etc/exim4
 Maybe something is not working, use this image with caution, bad things can happens. YHBW  
 
 ## Environment Variables
-| Name                | Description                                            | Default         |
-| ------------------- | ------------------------------------------------------ | --------------- |
-| EXIM_LOGDIR         | Path for Exim logfiles                                 | /var/log/exim4/ |
-| EXIM_OPTIONS        | Additional command line options for Exim startup       |                 |
+| Name                | Description                                                     | Default         |
+| ------------------- | --------------------------------------------------------------- | --------------- |
+| EXIM_LOGDIR         | Path for Exim logfiles                                          | /var/log/exim4/ |
+| EXIM_OPTIONS        | Additional (but optional) command line options for Exim startup |                 |
+| QUEUE_CYCLE         | time interval for the queue runner                              | 1m (one minute) |

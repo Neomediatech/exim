@@ -26,4 +26,5 @@ EXPOSE 25 465 587
 # HEALTHCHECK --interval=30s --timeout=30s --start-period=10s --retries=20 CMD nc -w 7 -zv 0.0.0.0 25
       
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["/tini","--","/usr/sbin/exim4","-bd","-q1m"]
+#CMD ["/tini","--","/usr/sbin/exim4","-bd","-q1m"]
+CMD ["/tini","--","/usr/sbin/exim4","-bd"]
