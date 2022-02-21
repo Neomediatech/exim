@@ -29,3 +29,8 @@ Maybe something is not working, use this image with caution, bad things can happ
 | EXIM_LOGDIR         | Path for Exim logfiles                                          | /var/log/exim4/ |
 | EXIM_OPTIONS        | Additional (but optional) command line options for Exim startup |                 |
 | QUEUE_CYCLE         | time interval for the queue runner                              | 1m (one minute) |
+
+## From source version
+There's also an image version compiled from Exim (Debian/Ubuntu) sources.  
+This because we need DMARC and SPF support, not included in default exim4-daemon-heavy Ubuntu package.
+
