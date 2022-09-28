@@ -10,7 +10,7 @@ KEY=${CERT_DIR}/privkey.pem
 DAYS=1095
 
 #SSLEAY=/tmp/exim.ssleay.$$.cnf
-SSLEAY="$(tempfile -m600 -pexi)"
+SSLEAY="$(mktemp /tmp/exiXXXXXXX)"
 
 cat > $SSLEAY <<EOM
 [ req ]
