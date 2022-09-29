@@ -62,7 +62,9 @@ if [ -f /run/secrets/dovecot-fqdn-cert.txt ]; then
 fi
 
 if [ -d ${CERT_DIR} ]; then
-    sed -i "s/^SERVER_CERT.*$/SERVER_CERT=$MAILSERVER_CERT/" /etc/exim4/conf.d/main/00_exim4-config_listmacrosdefs-custom
+    if [ -f /etc/exim4/conf.d/main/00_exim4-config_listmacrosdefs-custom ]; then
+      sed -i "s/^SERVER_CERT.*$/SERVER_CERT=$MAILSERVER_CERT/" /etc/exim4/conf.d/main/00_exim4-config_listmacrosdefs-custom
+    fi
     [ -d /data/certs/archive/$MAILSERVER_CERT ] && chmod 644 /data/certs/archive/$MAILSERVER_CERT/privkey*.pem
 else
     mkdir -p ${CERT_DIR}
