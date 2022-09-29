@@ -78,6 +78,9 @@ if [ ! -d /proc/sys/net/ipv6 ]; then
     fi
 fi
 
+# set permission on exim scan directory
+chown Debian-exim:Debian-exim /var/spool/exim4/scan && chmod 777 /var/spool/exim4/scan
+
 update-exim4.conf
 
 cmd="/dockerize"
