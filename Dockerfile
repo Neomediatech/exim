@@ -9,12 +9,15 @@ LABEL maintainer="docker-dario@neomediatech.it" \
       org.label-schema.vcs-url=https://github.com/Neomediatech/${SERVICE} \
       org.label-schema.maintainer=Neomediatech
 
+RUN useradd  -u 5000 -U -s /bin/false -m -d /var/spool/virtual vmail && \
+    groupadd -g 5001 Debian-exim && \
+    useradd  -g 5001 -u 5001 -s /usr/sbin/nologin -m -d /var/spool/exim4 Debian-exim
+
 RUN apt-get update && apt-get -y dist-upgrade && \
     apt-get install -y --no-install-recommends mariadb-client exim4-daemon-heavy \
             libswitch-perl redis-tools openssl curl ca-certificates \
             libdbd-sqlite3-perl libdbi-perl && \
     rm -rf /var/lib/apt/lists* && \
-    useradd -u 5000 -U -s /bin/false -m -d /var/spool/virtual vmail && \
     mkdir -p /srv/scripts 
 
 ADD https://raw.githubusercontent.com/Neomediatech/assets/main/scripts/logrotate.sh /srv/scripts/logrotate.sh
