@@ -79,6 +79,7 @@ if [ ! -d /proc/sys/net/ipv6 ]; then
 fi
 
 # set permission on exim scan directory
+mkdir -p /var/spool/exim4/scan
 chown -R Debian-exim:Debian-exim /var/spool/exim4 && chmod 777 /var/spool/exim4/scan
 
 update-exim4.conf
