@@ -15,18 +15,18 @@ if [ "$HONEYPOT" == "false" ]; then
     ln -s /dev/stderr /var/log/exim4/paniclog
     echo 'log_file_path = syslog' > /etc/exim4/conf.d/main/02_custom
   else
-    if [ ! -d "${LOGDIR}" ]; then
-      mkdir -p "${LOGDIR}"
-      chown Debian-exim:adm "${LOGDIR}"
-      chmod 750 "${LOGDIR}"
-      chmod g+s "${LOGDIR}"
-    fi
+    [ ! -d "${LOGDIR}" ] && mkdir -p "${LOGDIR}"
+    chown Debian-exim:adm "${LOGDIR}"
+    chmod 750 "${LOGDIR}"
+    chmod g+s "${LOGDIR}"
 
-    if [ ! -f "${LOGDIR}/mainlog" ]; then
-      touch "${LOGDIR}/mainlog"
-      chown Debian-exim:adm "${LOGDIR}/mainlog"
-      chmod 640 "${LOGDIR}/mainlog"
-    fi
+    [ ! -f "${LOGDIR}/mainlog" ] && touch "${LOGDIR}/mainlog"
+    chown Debian-exim:adm "${LOGDIR}/mainlog"
+    chmod 640 "${LOGDIR}/mainlog"
+
+    [ ! -f "${LOGDIR}/rejectlog" ] && touch "${LOGDIR}/rejectlog"
+    chown Debian-exim:adm "${LOGDIR}/rejectlog"
+    chmod 640 "${LOGDIR}/rejectlog"
 
     if [ -f /srv/scripts/logrotate.sh ]; then
       /srv/scripts/logrotate.sh "${LOGDIR}/mainlog"
