@@ -82,6 +82,9 @@ fi
 mkdir -p /var/spool/exim4/scan
 chown -R Debian-exim:Debian-exim /var/spool/exim4 && chmod 777 /var/spool/exim4/scan
 
+[ ! -d /var/spool/virtual ] && mkdir -p /var/spool/virtual
+chown vmail:vmail /var/spool/virtual
+
 update-exim4.conf
 
 cmd="/dockerize"
