@@ -1,7 +1,7 @@
 ARG VERSION \
     SERVICE
 
-FROM neomediatech/exim as builder
+FROM neomediatech/exim:4.93 as builder
 
 RUN cp /etc/init.d/exim4 ~/exim4.init && \
     cp /etc/default/exim4 ~/exim4.default && \
@@ -27,7 +27,7 @@ RUN cd $(find /exim-src/ -maxdepth 1 -mindepth 1 -type d) && \
     fakeroot debian/rules pack-configs && \
     debuild -us -uc
 
-FROM neomediatech/exim
+FROM neomediatech/exim:4.93
 
 COPY --from=builder "/exim-src/exim4-daemon-heavy_*.deb" "/"
 

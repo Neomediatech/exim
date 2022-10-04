@@ -18,7 +18,7 @@ Because of very customized and critical settings, all Exim config files are bind
 If you bind-mount your config files on /data/exim4/conf container they will be used.  
 The tree of the config files must be the same as they are on /etc/exim4  
 
-(test) docker run --rm -it -v /host-exim-conf/:/etc/exim4/ --name exim-local exim-local
+(test) docker run --rm -it -v /host-exim-conf/:/etc/exim4/ --name exim neomediatech/exim
 
 # WARNING
 Maybe something is not working, use this image with caution, bad things can happens. YHBW  
