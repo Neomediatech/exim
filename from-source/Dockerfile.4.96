@@ -1,7 +1,7 @@
 ARG VERSION \
     SERVICE
 
-FROM neomediatech/exim:4.96 as builder
+FROM neomediatech/exim:4.96 AS builder
 
 RUN cp /etc/init.d/exim4 ~/exim4.init && \
     cp /etc/default/exim4 ~/exim4.default && \
