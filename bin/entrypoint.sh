@@ -1,7 +1,25 @@
 #!/bin/bash
 
-MAILSERVER_CERT=${MAILSERVER_CERT:-noservername.domain.tld}
-CERT_DIR="/data/certs/live/${MAILSERVER_CERT}"
+BASE_CERT_DIR="/data/certs/live"
+[ ! -d "$BASE_CERT_DIR" ] && mkdir -p "$BASE_CERT_DIR"
+
+# check if certificate is already generated (cert.conf exists?)
+if [ ! -f $BASE_CERT_DIR/cert.conf ]; then
+    if [ "x${MAILSERVER_CERT}" = "x" ]; then
+        # build random domain (if 'diceware' is installed)
+        which diceware 1>/dev/null
+        if [ $? -eq 0 ]; then
+            MAILSERVER_CERT="$(diceware --no-caps -n 2).$(diceware --no-caps -n 2|cut -b -3)"
+        else
+       	    MAILSERVER_CERT="noservername.domain.tld"
+        fi
+    fi
+    echo "MAILSERVER_CERT=$MAILSERVER_CERT" > $BASE_CERT_DIR/cert.conf
+    echo "BASE_CERT_DIR=$BASE_CERT_DIR" >> $BASE_CERT_DIR/cert.conf
+fi
+source $BASE_CERT_DIR/cert.conf
+#MAILSERVER_CERT=${MAILSERVER_CERT:-noservername.domain.tld}
+CERT_DIR="${BASE_CERT_DIR}/${MAILSERVER_CERT}"
 LOGDIR=${EXIM_LOGDIR:-/var/log/exim4}
 HONEYPOT=${HONEYPOT:-false}
 QUEUE_CYCLE=${QUEUE_CYCLE:-1m}
@@ -65,9 +83,15 @@ if [ -d ${CERT_DIR} ]; then
     if [ -f /etc/exim4/conf.d/main/00_exim4-config_listmacrosdefs-custom ]; then
       sed -i "s/^SERVER_CERT.*$/SERVER_CERT=$MAILSERVER_CERT/" /etc/exim4/conf.d/main/00_exim4-config_listmacrosdefs-custom
     fi
-    [ -d /data/certs/archive/$MAILSERVER_CERT ] && chmod 644 /data/certs/archive/$MAILSERVER_CERT/privkey*.pem
+    [ -d ${BASE_CERT_DIR}/$MAILSERVER_CERT ] && chmod 644 ${BASE_CERT_DIR}/$MAILSERVER_CERT/privkey*.pem
 else
     mkdir -p ${CERT_DIR}
+fi
+if [ ! -f /etc/exim4/conf.d/main/00_exim4-config_listmacrosdefs-custom ]; then
+    echo "MAIN_TLS_CERTIFICATE = $CERT_DIR/fullchain.pem" > /etc/exim4/conf.d/main/00_exim4-config_listmacrosdefs-custom
+    echo "MAIN_TLS_PRIVATEKEY = $CERT_DIR/privkey.pem" >> /etc/exim4/conf.d/main/00_exim4-config_listmacrosdefs-custom
+    echo "MAIN_TLS_ENABLE = yes" >> /etc/exim4/conf.d/main/00_exim4-config_listmacrosdefs-custom
+    echo "tls_on_connect_ports = 25 : 465 : 587" >> /etc/exim4/conf.d/main/00_exim4-config_listmacrosdefs-custom
 fi
 [ ! -f ${CERT_DIR}/privkey.pem ] && /gencert.sh 
 

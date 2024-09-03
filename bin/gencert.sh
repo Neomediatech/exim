@@ -1,15 +1,39 @@
-#!/bin/sh -e
-MAILSERVER_CERT=${MAILSERVER_CERT:-noservername.domain.tld}
-CERT_DIR="${CERT_DIR:-/data/certs/live/${MAILSERVER_CERT}}"
+#!/bin/bash -e
 
-[ ! -d ${CERT_DIR} ] && mkdir -p ${CERT_DIR}
+source /data/certs/live/cert.conf
 
-CERT=${CERT_DIR}/fullchain.pem
-KEY=${CERT_DIR}/privkey.pem
+#MAILSERVER_CERT=${MAILSERVER_CERT:-noservername.domain.tld}
+
+countryName="NN"
+stateOrProvinceName="NoWhere"
+localityName="IvryUr"
+organizationName="MyCorp"
+organizationalUnitName="MyOU"
+
+# build random data (if 'diceware' is installed)
+which diceware 1>/dev/null
+if [ $? -eq 0 ]; then
+    RANDOMAIN="$(diceware --no-caps -n 2).$(diceware --no-caps -n 2|cut -b -3)"
+
+    [ "$MAILSERVER_CERT" = "noservername.domain.tld" ] && MAILSERVER_CERT=${RANDOMAIN}
+
+    countryName="$(diceware -n 2|tr -d [:lower:])"
+    stateOrProvinceName="$(diceware -n 2)"
+    localityName="$(diceware -n 2)"
+    organizationName="$(diceware -n 1) Corp"
+    organizationalUnitName="$(diceware -n 1) OU"
+    emailAddress="$(diceware --no-caps -n 1)@${MAILSERVER_CERT}"
+fi
+
 # valid for three years
 DAYS=1095
 
-#SSLEAY=/tmp/exim.ssleay.$$.cnf
+CERT_DIR="${CERT_DIR:-${BASE_CERT_DIR}/${MAILSERVER_CERT}}"
+
+CERT=${CERT_DIR}/fullchain.pem
+KEY=${CERT_DIR}/privkey.pem
+
+[ ! -d ${CERT_DIR} ] && mkdir -p ${CERT_DIR}
 SSLEAY="$(mktemp /tmp/exiXXXXXXX)"
 
 cat > $SSLEAY <<EOM
@@ -19,13 +43,13 @@ default_keyfile = exim.key
 distinguished_name = req_distinguished_name
 prompt = no
 [ req_distinguished_name ]
-countryName = NN
-stateOrProvinceName = NoWhere
-localityName = IvryUr
-organizationName = MyCorp
-organizationalUnitName = MyOU
+countryName = $countryName
+stateOrProvinceName = $stateOrProvinceName
+localityName = $localityName
+organizationName = $organizationName
+organizationalUnitName = $organizationalUnitName
 commonName = ${MAILSERVER_CERT}
-emailAddress = notme@${MAILSERVER_CERT}
+emailAddress = $emailAddress
 EOM
 
 echo "[*] Creating a self signed SSL certificate for Exim!"
@@ -41,6 +65,11 @@ rm -f $SSLEAY
 
 chown root:Debian-exim $KEY $CERT $DH
 chmod 640 $KEY $CERT $DH
+
+echo "MAIN_TLS_CERTIFICATE = $BASE_CERT_DIR/$MAILSERVER_CERT/fullchain.pem" > /etc/exim4/conf.d/main/00_exim4-config_listmacrosdefs-custom
+echo "MAIN_TLS_PRIVATEKEY = $BASE_CERT_DIR/$MAILSERVER_CERT/privkey.pem" >> /etc/exim4/conf.d/main/00_exim4-config_listmacrosdefs-custom
+echo "MAIN_TLS_ENABLE = yes" >> /etc/exim4/conf.d/main/00_exim4-config_listmacrosdefs-custom
+echo "tls_on_connect_ports = 25 : 465 : 587" >> /etc/exim4/conf.d/main/00_exim4-config_listmacrosdefs-custom
 
 echo "[*] Done generating self signed certificates for exim!"
 echo "    Refer to the documentation and example configuration files"
