@@ -1,6 +1,6 @@
-FROM neomediatech/ubuntu-base:22.04
+FROM neomediatech/ubuntu-base:24.04
 
-ENV EXIM_VERSION=4.95 \
+ENV EXIM_VERSION=4.97 \
     SERVICE=exim
 
 LABEL maintainer="docker-dario@neomediatech.it" \ 
