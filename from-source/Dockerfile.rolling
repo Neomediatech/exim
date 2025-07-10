@@ -1,23 +1,21 @@
 ARG VERSION \
     SERVICE
 
-FROM ghcr.io/neomediatech/exim:4.97 AS builder
+FROM ghcr.io/neomediatech/exim:rolling as builder
 
 RUN cp /etc/init.d/exim4 ~/exim4.init && \
     cp /etc/default/exim4 ~/exim4.default && \
     dpkg -P exim4-base exim4-daemon-heavy exim4-config && \
-    sed -i 's/^Types: deb$/Types: deb deb-src/g' /etc/apt/sources.list.d/ubuntu.sources && \
+    sed -i 's/^# deb-src /deb-src /g' /etc/apt/sources.list && \
     apt-get update 
 
 RUN apt-get install -y --no-install-recommends --no-install-suggests \
        dpkg-dev checkinstall pkg-config \
-       pbuilder devscripts grep-dctrl debhelper
+       pbuilder devscripts dpatch grep-dctrl debhelper
 
 RUN mkdir /exim-src && cd /exim-src && \
     apt-get -y source exim4-daemon-heavy && \
     apt-get -y build-dep exim4
-
-RUN apt-get install -y --no-install-recommends --no-install-suggests fakeroot libfl-dev libnsl-dev
 
 RUN cd $(find /exim-src/ -maxdepth 1 -mindepth 1 -type d) && \
     fakeroot debian/rules unpack-configs && \
@@ -29,7 +27,7 @@ RUN cd $(find /exim-src/ -maxdepth 1 -mindepth 1 -type d) && \
     fakeroot debian/rules pack-configs && \
     debuild -us -uc
 
-FROM ghcr.io/neomediatech/exim:4.97
+FROM ghcr.io/neomediatech/exim:rolling
 
 COPY --from=builder "/exim-src/exim4-daemon-heavy_*.deb" "/"
 
