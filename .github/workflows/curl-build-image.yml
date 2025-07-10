@@ -28,7 +28,7 @@ jobs:
     uses: Neomediatech/gh-workflows/.github/workflows/check-and-build-docker-images.yml@main
     #uses: Neomediatech/gh-workflows/.github/workflows/build-docker-image.yml@main
     with:
-      base-image: ghcr.io/neomediatech/exim
+      base-image: ghcr.io/neomediatech/ubuntu-base
       package-name: neomediatech/exim
       derived-image-prefix: ghcr.io/neomediatech/exim
       versions: '["4.98"]'
