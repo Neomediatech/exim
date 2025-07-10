@@ -1,1 +1,1 @@
-gio 10 lug 2025, 17:54:31, CEST --- ghcr.io/neomediatech/exim:rolling UPDATED (image build needed: true)
+gio 10 lug 2025, 18:16:54, CEST --- ghcr.io/neomediatech/exim:rolling not-needed (image build needed: false)
