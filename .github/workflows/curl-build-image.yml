@@ -35,6 +35,7 @@ jobs:
       update-image: "true"
       package-to-check: "exim4-daemon-heavy"
       derived-image-repo: "Neomediatech/exim"
+      derived-image-repo-ref: "master"
     secrets:
       NOTIFY_CMD: ${{ secrets.NOTIFY_CMD }}
       NOTIFY_UP: ${{ secrets.NOTIFY_UP }}
