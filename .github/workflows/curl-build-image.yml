@@ -31,7 +31,7 @@ jobs:
       base-image: ghcr.io/neomediatech/ubuntu-base
       package-name: neomediatech/exim
       derived-image-prefix: ghcr.io/neomediatech/exim
-      versions: '["4.98"]'
+      versions: '["4.93"]'
       update-image: "true"
       package-to-check: "exim4-daemon-heavy"
       derived-image-repo: "Neomediatech/exim"
