@@ -1,12 +1,12 @@
 -----------------------------------
-ven 11 lug 2025, 18:58:29, CEST --- ghcr.io/neomediatech/exim:4.93
+ven 11 lug 2025, 19:06:15, CEST --- ghcr.io/neomediatech/exim:4.95
 
 Report Summary
 
 ┌───────────────────────────────────────────────┬────────┬─────────────────┬─────────┐
 │                    Target                     │  Type  │ Vulnerabilities │ Secrets │
 ├───────────────────────────────────────────────┼────────┼─────────────────┼─────────┤
-│ ghcr.io/neomediatech/exim:4.93 (ubuntu 20.04) │ ubuntu │        0        │    -    │
+│ ghcr.io/neomediatech/exim:4.95 (ubuntu 22.04) │ ubuntu │        0        │    -    │
 └───────────────────────────────────────────────┴────────┴─────────────────┴─────────┘
 Legend:
 - '-': Not scanned
