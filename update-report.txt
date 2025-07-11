@@ -1,1 +1,2 @@
 gio 10 lug 2025, 17:53:42, CEST --- ghcr.io/neomediatech/exim:rolling UPDATED
+ven 11 lug 2025, 18:57:28, CEST --- ghcr.io/neomediatech/exim:4.93 UPDATED
