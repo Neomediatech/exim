@@ -1,17 +1,26 @@
 ARG VERSION \
     SERVICE
 
-FROM ghcr.io/neomediatech/exim:rolling as builder
+FROM ghcr.io/neomediatech/exim:rolling AS builder
 
 RUN cp /etc/init.d/exim4 ~/exim4.init && \
     cp /etc/default/exim4 ~/exim4.default && \
     dpkg -P exim4-base exim4-daemon-heavy exim4-config && \
-    sed -i 's/^# deb-src /deb-src /g' /etc/apt/sources.list && \
+    echo 'Types: deb-src' >> /etc/apt/sources.list.d/ubuntu.sources && \
+    echo 'URIs: http://archive.ubuntu.com/ubuntu/' >> /etc/apt/sources.list.d/ubuntu.sources && \
+    echo 'Suites: plucky plucky-updates plucky-backports' >> /etc/apt/sources.list.d/ubuntu.sources && \
+    echo 'Components: main universe restricted multiverse' >> /etc/apt/sources.list.d/ubuntu.sources && \
+    echo 'Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg' >> /etc/apt/sources.list.d/ubuntu.sources && \
+    echo 'Types: deb-src' >> /etc/apt/sources.list.d/ubuntu.sources && \
+    echo 'URIs: http://security.ubuntu.com/ubuntu/' >> /etc/apt/sources.list.d/ubuntu.sources && \
+    echo 'Suites: plucky-security' >> /etc/apt/sources.list.d/ubuntu.sources && \
+    echo 'Components: main universe restricted multiverse' >> /etc/apt/sources.list.d/ubuntu.sources && \
+    echo 'Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg' >> /etc/apt/sources.list.d/ubuntu.sources && \
     apt-get update 
 
 RUN apt-get install -y --no-install-recommends --no-install-suggests \
        dpkg-dev checkinstall pkg-config \
-       pbuilder devscripts dpatch grep-dctrl debhelper
+       pbuilder devscripts quilt grep-dctrl debhelper
 
 RUN mkdir /exim-src && cd /exim-src && \
     apt-get -y source exim4-daemon-heavy && \
