@@ -1,2 +1,14 @@
 -----------------------------------
-gio 10 lug 2025, 18:16:54, CEST --- ghcr.io/neomediatech/exim:rolling NOT SCANNED
+ven 11 lug 2025, 18:58:29, CEST --- ghcr.io/neomediatech/exim:4.93
+
+Report Summary
+
+┌───────────────────────────────────────────────┬────────┬─────────────────┬─────────┐
+│                    Target                     │  Type  │ Vulnerabilities │ Secrets │
+├───────────────────────────────────────────────┼────────┼─────────────────┼─────────┤
+│ ghcr.io/neomediatech/exim:4.93 (ubuntu 20.04) │ ubuntu │        0        │    -    │
+└───────────────────────────────────────────────┴────────┴─────────────────┴─────────┘
+Legend:
+- '-': Not scanned
+- '0': Clean (no security findings detected)
+
