@@ -28,3 +28,17 @@ Legend:
 - '-': Not scanned
 - '0': Clean (no security findings detected)
 
+-----------------------------------
+ven 11 lug 2025, 19:10:34, CEST --- ghcr.io/neomediatech/exim:latest
+
+Report Summary
+
+┌─────────────────────────────────────────────────┬────────┬─────────────────┬─────────┐
+│                     Target                      │  Type  │ Vulnerabilities │ Secrets │
+├─────────────────────────────────────────────────┼────────┼─────────────────┼─────────┤
+│ ghcr.io/neomediatech/exim:latest (ubuntu 24.04) │ ubuntu │        0        │    -    │
+└─────────────────────────────────────────────────┴────────┴─────────────────┴─────────┘
+Legend:
+- '-': Not scanned
+- '0': Clean (no security findings detected)
+
