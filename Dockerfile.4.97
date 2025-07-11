@@ -1,4 +1,4 @@
-FROM neomediatech/ubuntu-base:24.04
+FROM ghcr.io/neomediatech/ubuntu-base:24.04
 
 ENV EXIM_VERSION=4.97 \
     SERVICE=exim

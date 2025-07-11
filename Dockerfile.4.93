@@ -1,4 +1,4 @@
-FROM neomediatech/ubuntu-base:20.04
+FROM ghcr.io/neomediatech/ubuntu-base:20.04
 
 ENV EXIM_VERSION=4.93-13ubuntu1.5 \
     SERVICE=exim
