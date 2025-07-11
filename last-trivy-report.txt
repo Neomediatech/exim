@@ -1,2 +1,4 @@
 -----------------------------------
 ven 11 lug 2025, 19:30:19, CEST --- ghcr.io/neomediatech/exim:4.93 NOT SCANNED
+-----------------------------------
+ven 11 lug 2025, 19:30:45, CEST --- ghcr.io/neomediatech/exim:4.95 NOT SCANNED
