@@ -1,2 +1,2 @@
 -----------------------------------
-ven 11 lug 2025, 19:48:22, CEST --- ghcr.io/neomediatech/exim:4.96 NOT SCANNED
+ven 11 lug 2025, 19:51:42, CEST --- ghcr.io/neomediatech/exim:rolling NOT SCANNED
