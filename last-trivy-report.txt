@@ -10,3 +10,5 @@ dom 13 lug 2025, 20:43:04, CEST --- ghcr.io/neomediatech/exim:4.97-from-source N
 dom 13 lug 2025, 20:43:30, CEST --- ghcr.io/neomediatech/exim:4.96 NOT SCANNED
 -----------------------------------
 dom 13 lug 2025, 20:43:56, CEST --- ghcr.io/neomediatech/exim:4.96-from-source NOT SCANNED
+-----------------------------------
+dom 13 lug 2025, 20:44:22, CEST --- ghcr.io/neomediatech/exim:4.95 NOT SCANNED
