@@ -4,3 +4,5 @@ dom 13 lug 2025, 20:41:45, CEST --- ghcr.io/neomediatech/exim:rolling NOT SCANNE
 dom 13 lug 2025, 20:42:10, CEST --- ghcr.io/neomediatech/exim:latest NOT SCANNED
 -----------------------------------
 dom 13 lug 2025, 20:42:37, CEST --- ghcr.io/neomediatech/exim:4.97 NOT SCANNED
+-----------------------------------
+dom 13 lug 2025, 20:43:04, CEST --- ghcr.io/neomediatech/exim:4.97-from-source NOT SCANNED
