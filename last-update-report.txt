@@ -2,3 +2,4 @@ ven 11 lug 2025, 20:22:41, CEST --- ghcr.io/neomediatech/exim:4.97 not-needed (i
 ven 11 lug 2025, 20:27:45, CEST --- ghcr.io/neomediatech/exim:4.97-from-source UPDATED (image build needed: true)
 ven 11 lug 2025, 20:28:26, CEST --- ghcr.io/neomediatech/exim:4.96 not-needed (image build needed: false)
 dom 13 lug 2025, 19:18:59, CEST --- ghcr.io/neomediatech/exim:4.96-from-source UPDATED (image build needed: true)
+dom 13 lug 2025, 19:19:51, CEST --- ghcr.io/neomediatech/exim:4.95 not-needed (image build needed: false)
