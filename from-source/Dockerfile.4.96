@@ -3,6 +3,13 @@ ARG VERSION \
 
 FROM ghcr.io/neomediatech/exim:4.96 AS builder
 
+RUN echo 'deb http://old-releases.ubuntu.com/ubuntu/ lunar main restricted universe multiverse' > /etc/apt/sources.list ; \
+    echo 'deb http://old-releases.ubuntu.com/ubuntu/ lunar-updates main restricted universe multiverse' >> /etc/apt/sources.list ; \
+    echo 'deb http://old-releases.ubuntu.com/ubuntu/ lunar-security main restricted universe multiverse' >> /etc/apt/sources.list ; \
+    echo 'deb-src http://old-releases.ubuntu.com/ubuntu/ lunar main restricted universe multiverse' >> /etc/apt/sources.list ; \
+    echo 'deb-src http://old-releases.ubuntu.com/ubuntu/ lunar-updates main restricted universe multiverse' >> /etc/apt/sources.list ; \
+    echo 'deb-src http://old-releases.ubuntu.com/ubuntu/ lunar-security main restricted universe multiverse' >> /etc/apt/sources.list
+
 RUN cp /etc/init.d/exim4 ~/exim4.init && \
     cp /etc/default/exim4 ~/exim4.default && \
     dpkg -P exim4-base exim4-daemon-heavy exim4-config && \
