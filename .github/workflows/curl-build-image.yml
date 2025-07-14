@@ -33,8 +33,8 @@ jobs:
       versions: '["4.97"]'
       update-image: "true"
       package-to-check: "exim4-daemon-heavy"
-      derived-image-repo: "Neomediatech/exim"
-      derived-image-repo-ref: "master"
+      #derived-image-repo: "Neomediatech/exim"
+      #derived-image-repo-ref: "master"
       force-build: "false"
     secrets:
       NOTIFY_CMD: ${{ secrets.NOTIFY_CMD }}
