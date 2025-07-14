@@ -7,3 +7,4 @@ ven 11 lug 2025, 19:31:52, CEST --- ghcr.io/neomediatech/exim:4.96 UPDATED
 ven 11 lug 2025, 20:27:06, CEST --- ghcr.io/neomediatech/exim:4.97-from-source UPDATED
 dom 13 lug 2025, 19:18:11, CEST --- ghcr.io/neomediatech/exim:4.96-from-source UPDATED
 dom 13 lug 2025, 20:48:19, CEST --- ghcr.io/neomediatech/exim:4.93-from-source UPDATED
+lun 14 lug 2025, 18:17:51, CEST --- ghcr.io/neomediatech/exim:4.97 UPDATED
