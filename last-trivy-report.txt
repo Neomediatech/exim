@@ -1,2 +1,4 @@
 -----------------------------------
 lun 14 lug 2025, 17:48:34, CEST --- ghcr.io/neomediatech/exim:rolling NOT SCANNED
+-----------------------------------
+lun 14 lug 2025, 17:49:02, CEST --- ghcr.io/neomediatech/exim:latest NOT SCANNED
