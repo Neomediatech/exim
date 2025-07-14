@@ -25,17 +25,17 @@ permissions:
 
 jobs:
   build-image:
-    uses: Neomediatech/gh-workflows/.github/workflows/build-docker-image-bulk.yml@main
+    uses: Neomediatech/gh-workflows/.github/workflows/check-and-build-docker-images.yml@main
     with:
       base-image: ghcr.io/neomediatech/ubuntu-base
       package-name: neomediatech/exim
       derived-image-prefix: ghcr.io/neomediatech/exim
-      versions: '["4.97"]'
+      versions: '[{"version":"4.97","type":"."}]'
       update-image: "true"
       package-to-check: "exim4-daemon-heavy"
-      #derived-image-repo: "Neomediatech/exim"
-      #derived-image-repo-ref: "master"
-      force-build: "false"
+      derived-image-repo: "Neomediatech/exim"
+      derived-image-repo-ref: "master"
+      force-build: "true"
     secrets:
       NOTIFY_CMD: ${{ secrets.NOTIFY_CMD }}
       NOTIFY_UP: ${{ secrets.NOTIFY_UP }}
