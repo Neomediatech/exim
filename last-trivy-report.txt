@@ -6,3 +6,5 @@ lun 14 lug 2025, 17:49:02, CEST --- ghcr.io/neomediatech/exim:latest NOT SCANNED
 lun 14 lug 2025, 17:49:29, CEST --- ghcr.io/neomediatech/exim:4.97 NOT SCANNED
 -----------------------------------
 lun 14 lug 2025, 17:50:06, CEST --- ghcr.io/neomediatech/exim:4.97-from-source NOT SCANNED
+-----------------------------------
+lun 14 lug 2025, 17:50:34, CEST --- ghcr.io/neomediatech/exim:4.96 NOT SCANNED
