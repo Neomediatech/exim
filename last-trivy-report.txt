@@ -1,18 +1,14 @@
 -----------------------------------
-lun 14 lug 2025, 17:48:34, CEST --- ghcr.io/neomediatech/exim:rolling NOT SCANNED
------------------------------------
-lun 14 lug 2025, 17:49:02, CEST --- ghcr.io/neomediatech/exim:latest NOT SCANNED
------------------------------------
-lun 14 lug 2025, 17:49:29, CEST --- ghcr.io/neomediatech/exim:4.97 NOT SCANNED
------------------------------------
-lun 14 lug 2025, 17:50:06, CEST --- ghcr.io/neomediatech/exim:4.97-from-source NOT SCANNED
------------------------------------
-lun 14 lug 2025, 17:50:34, CEST --- ghcr.io/neomediatech/exim:4.96 NOT SCANNED
------------------------------------
-lun 14 lug 2025, 17:51:00, CEST --- ghcr.io/neomediatech/exim:4.96-from-source NOT SCANNED
------------------------------------
-lun 14 lug 2025, 17:51:26, CEST --- ghcr.io/neomediatech/exim:4.95 NOT SCANNED
------------------------------------
-lun 14 lug 2025, 17:51:52, CEST --- ghcr.io/neomediatech/exim:4.93 NOT SCANNED
------------------------------------
-lun 14 lug 2025, 17:52:18, CEST --- ghcr.io/neomediatech/exim:4.93-from-source NOT SCANNED
+lun 14 lug 2025, 18:18:54, CEST --- ghcr.io/neomediatech/exim:4.97
+
+Report Summary
+
+┌───────────────────────────────────────────────┬────────┬─────────────────┬─────────┐
+│                    Target                     │  Type  │ Vulnerabilities │ Secrets │
+├───────────────────────────────────────────────┼────────┼─────────────────┼─────────┤
+│ ghcr.io/neomediatech/exim:4.97 (ubuntu 24.04) │ ubuntu │        0        │    -    │
+└───────────────────────────────────────────────┴────────┴─────────────────┴─────────┘
+Legend:
+- '-': Not scanned
+- '0': Clean (no security findings detected)
+
