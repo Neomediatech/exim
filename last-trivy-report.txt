@@ -2,3 +2,5 @@
 mer 16 lug 2025, 15:42:45, CEST --- ghcr.io/neomediatech/exim:rolling NOT SCANNED
 -----------------------------------
 mer 16 lug 2025, 15:43:18, CEST --- ghcr.io/neomediatech/exim:latest NOT SCANNED
+-----------------------------------
+mer 16 lug 2025, 15:43:52, CEST --- ghcr.io/neomediatech/exim:4.97 NOT SCANNED
