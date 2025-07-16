@@ -22,6 +22,7 @@ jobs:
       update-image: "true"
       package-to-check: "exim4-daemon-heavy"
       skip-type-from-base-image: "true"
+      image-type: "generic"
     secrets:
       NOTIFY_CMD: ${{ secrets.NOTIFY_CMD }}
       NOTIFY_UP: ${{ secrets.NOTIFY_UP }}
