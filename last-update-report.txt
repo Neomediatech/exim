@@ -1,1 +1,2 @@
 mer 23 lug 2025, 18:06:48, CEST --- ghcr.io/neomediatech/exim:rolling UPDATED (image build needed: true)
+mer 23 lug 2025, 18:09:04, CEST --- ghcr.io/neomediatech/exim:latest UPDATED (image build needed: true)
