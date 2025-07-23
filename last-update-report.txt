@@ -3,3 +3,4 @@ mer 23 lug 2025, 18:09:04, CEST --- ghcr.io/neomediatech/exim:latest UPDATED (im
 mer 23 lug 2025, 18:11:18, CEST --- ghcr.io/neomediatech/exim:4.97 UPDATED (image build needed: true)
 mer 23 lug 2025, 18:13:29, CEST --- ghcr.io/neomediatech/exim:4.96 UPDATED (image build needed: true)
 mer 23 lug 2025, 18:15:40, CEST --- ghcr.io/neomediatech/exim:4.95 UPDATED (image build needed: true)
+mer 23 lug 2025, 18:18:21, CEST --- ghcr.io/neomediatech/exim:4.93 UPDATED (image build needed: true)
