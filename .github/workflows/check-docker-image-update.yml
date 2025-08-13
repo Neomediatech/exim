@@ -24,9 +24,6 @@ jobs:
   build-image:
     uses: Neomediatech/gh-workflows/.github/workflows/build-docker-image-bulk.yml@main
     with:
-      base-image: ghcr.io/neomediatech/ubuntu-base
-      package-name: neomediatech/exim
-      derived-image-prefix: ghcr.io/neomediatech/exim
       force-build: "${{ github.event.inputs.force-build }}"
       update-image: "true"
       package-to-check: "exim4-daemon-heavy"
