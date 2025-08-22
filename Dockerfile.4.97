@@ -12,7 +12,7 @@ RUN useradd  -u 5000 -U -s /bin/false -m -d /var/spool/virtual vmail && \
 # install also 'diceware', to allow generating random words (to anonymi[s|z]e self signed certificate)
 RUN apt-get update && apt-get -y dist-upgrade && \
     apt-get install -y --no-install-recommends mariadb-client exim4-daemon-heavy \
-            libswitch-perl redis-tools openssl curl ca-certificates \
+            libswitch-perl redis-tools openssl \
             libdbd-sqlite3-perl libdbi-perl diceware && \
     rm -rf /var/lib/apt/lists* && \
     mkdir -p /srv/scripts 

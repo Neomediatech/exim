@@ -7,7 +7,7 @@ LABEL org.opencontainers.image.source=https://github.com/Neomediatech/${SERVICE}
 
 RUN apt-get update && apt-get -y dist-upgrade && \
     apt-get install -y --no-install-recommends mariadb-client exim4-daemon-heavy \
-            libswitch-perl redis-tools openssl curl ca-certificates libdbi-perl && \
+            libswitch-perl redis-tools openssl libdbi-perl && \
     rm -rf /var/lib/apt/lists* && \
     useradd -u 5000 -U -s /bin/false -m -d /var/spool/virtual vmail && \
     mkdir -p /srv/scripts 
