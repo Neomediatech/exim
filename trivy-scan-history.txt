@@ -390,3 +390,144 @@ Legend:
 - '0': Clean (no security findings detected)
 
 -------------------------------------------------------
+lun 23 feb 2026, 16:50:12, CET --- ghcr.io/neomediatech/exim:4.93-from-source
+
+Report Summary
+
+┌───────────────────────────────────────────────────────────┬────────┬─────────────────┬─────────┬───────────────────┐
+│                          Target                           │  Type  │ Vulnerabilities │ Secrets │ Misconfigurations │
+├───────────────────────────────────────────────────────────┼────────┼─────────────────┼─────────┼───────────────────┤
+│ ghcr.io/neomediatech/exim:4.93-from-source (ubuntu 20.04) │ ubuntu │        0        │    -    │         -         │
+└───────────────────────────────────────────────────────────┴────────┴─────────────────┴─────────┴───────────────────┘
+Legend:
+- '-': Not scanned
+- '0': Clean (no security findings detected)
+
+-------------------------------------------------------
+lun 23 feb 2026, 16:44:14, CET --- ghcr.io/neomediatech/exim:4.93
+
+Report Summary
+
+┌───────────────────────────────────────────────┬────────┬─────────────────┬─────────┬───────────────────┐
+│                    Target                     │  Type  │ Vulnerabilities │ Secrets │ Misconfigurations │
+├───────────────────────────────────────────────┼────────┼─────────────────┼─────────┼───────────────────┤
+│ ghcr.io/neomediatech/exim:4.93 (ubuntu 20.04) │ ubuntu │        0        │    -    │         -         │
+└───────────────────────────────────────────────┴────────┴─────────────────┴─────────┴───────────────────┘
+Legend:
+- '-': Not scanned
+- '0': Clean (no security findings detected)
+
+-------------------------------------------------------
+lun 23 feb 2026, 16:44:04, CET --- ghcr.io/neomediatech/exim:4.95
+
+Report Summary
+
+┌───────────────────────────────────────────────┬────────┬─────────────────┬─────────┬───────────────────┐
+│                    Target                     │  Type  │ Vulnerabilities │ Secrets │ Misconfigurations │
+├───────────────────────────────────────────────┼────────┼─────────────────┼─────────┼───────────────────┤
+│ ghcr.io/neomediatech/exim:4.95 (ubuntu 22.04) │ ubuntu │        0        │    -    │         -         │
+└───────────────────────────────────────────────┴────────┴─────────────────┴─────────┴───────────────────┘
+Legend:
+- '-': Not scanned
+- '0': Clean (no security findings detected)
+
+-------------------------------------------------------
+lun 23 feb 2026, 16:51:51, CET --- ghcr.io/neomediatech/exim:4.96-from-source
+
+Report Summary
+
+┌───────────────────────────────────────────────────────────┬────────┬─────────────────┬─────────┬───────────────────┐
+│                          Target                           │  Type  │ Vulnerabilities │ Secrets │ Misconfigurations │
+├───────────────────────────────────────────────────────────┼────────┼─────────────────┼─────────┼───────────────────┤
+│ ghcr.io/neomediatech/exim:4.96-from-source (ubuntu 23.04) │ ubuntu │        0        │    -    │         -         │
+└───────────────────────────────────────────────────────────┴────────┴─────────────────┴─────────┴───────────────────┘
+Legend:
+- '-': Not scanned
+- '0': Clean (no security findings detected)
+
+-------------------------------------------------------
+lun 23 feb 2026, 16:44:08, CET --- ghcr.io/neomediatech/exim:4.96
+
+Report Summary
+
+┌───────────────────────────────────────────────┬────────┬─────────────────┬─────────┬───────────────────┐
+│                    Target                     │  Type  │ Vulnerabilities │ Secrets │ Misconfigurations │
+├───────────────────────────────────────────────┼────────┼─────────────────┼─────────┼───────────────────┤
+│ ghcr.io/neomediatech/exim:4.96 (ubuntu 23.04) │ ubuntu │        0        │    -    │         -         │
+└───────────────────────────────────────────────┴────────┴─────────────────┴─────────┴───────────────────┘
+Legend:
+- '-': Not scanned
+- '0': Clean (no security findings detected)
+
+-------------------------------------------------------
+lun 23 feb 2026, 16:52:40, CET --- ghcr.io/neomediatech/exim:4.97-from-source
+
+Report Summary
+
+┌───────────────────────────────────────────────────────────┬────────┬─────────────────┬─────────┬───────────────────┐
+│                          Target                           │  Type  │ Vulnerabilities │ Secrets │ Misconfigurations │
+├───────────────────────────────────────────────────────────┼────────┼─────────────────┼─────────┼───────────────────┤
+│ ghcr.io/neomediatech/exim:4.97-from-source (ubuntu 24.04) │ ubuntu │        3        │    -    │         -         │
+└───────────────────────────────────────────────────────────┴────────┴─────────────────┴─────────┴───────────────────┘
+Legend:
+- '-': Not scanned
+- '0': Clean (no security findings detected)
+
+
+For OSS Maintainers: VEX Notice
+--------------------------------
+If you're an OSS maintainer and Trivy has detected vulnerabilities in your project that you believe are not actually exploitable, consider issuing a VEX (Vulnerability Exploitability eXchange) statement.
+VEX allows you to communicate the actual status of vulnerabilities in your project, improving security transparency and reducing false positives for your users.
+Learn more and start using VEX: https://trivy.dev/docs/v0.69/guide/supply-chain/vex/repo#publishing-vex-documents
+
+To disable this notice, set the TRIVY_DISABLE_VEX_NOTICE environment variable.
+
+
+ghcr.io/neomediatech/exim:4.97-from-source (ubuntu 24.04)
+=========================================================
+Total: 3 (HIGH: 3, CRITICAL: 0)
+
+┌────────────────┬────────────────┬──────────┬────────┬───────────────────────────┬───────────────────────────┬──────────────────────────────────────────────────────────────┐
+│    Library     │ Vulnerability  │ Severity │ Status │     Installed Version     │       Fixed Version       │                            Title                             │
+├────────────────┼────────────────┼──────────┼────────┼───────────────────────────┼───────────────────────────┼──────────────────────────────────────────────────────────────┤
+│ gpgv           │ CVE-2025-68973 │ HIGH     │ fixed  │ 2.4.4-2ubuntu17.3         │ 2.4.4-2ubuntu17.4         │ GnuPG: GnuPG: Information disclosure and potential arbitrary │
+│                │                │          │        │                           │                           │ code execution via out-of-bounds write...                    │
+│                │                │          │        │                           │                           │ https://avd.aquasec.com/nvd/cve-2025-68973                   │
+├────────────────┼────────────────┤          │        ├───────────────────────────┼───────────────────────────┼──────────────────────────────────────────────────────────────┤
+│ inetutils-ping │ CVE-2026-24061 │          │        │ 2:2.5-3ubuntu4            │ 2:2.5-3ubuntu4.1          │ telnetd in GNU Inetutils through 2.7 allows remote           │
+│                │                │          │        │                           │                           │ authentication bypa ...                                      │
+│                │                │          │        │                           │                           │ https://avd.aquasec.com/nvd/cve-2026-24061                   │
+├────────────────┼────────────────┤          │        ├───────────────────────────┼───────────────────────────┼──────────────────────────────────────────────────────────────┤
+│ redis-tools    │ CVE-2025-49844 │          │        │ 5:7.0.15-1ubuntu0.24.04.1 │ 5:7.0.15-1ubuntu0.24.04.2 │ Redis: Redis Lua Use-After-Free may lead to remote code      │
+│                │                │          │        │                           │                           │ execution                                                    │
+│                │                │          │        │                           │                           │ https://avd.aquasec.com/nvd/cve-2025-49844                   │
+└────────────────┴────────────────┴──────────┴────────┴───────────────────────────┴───────────────────────────┴──────────────────────────────────────────────────────────────┘
+-------------------------------------------------------
+lun 23 feb 2026, 16:44:52, CET --- ghcr.io/neomediatech/exim:4.97
+
+Report Summary
+
+┌───────────────────────────────────────────────┬────────┬─────────────────┬─────────┬───────────────────┐
+│                    Target                     │  Type  │ Vulnerabilities │ Secrets │ Misconfigurations │
+├───────────────────────────────────────────────┼────────┼─────────────────┼─────────┼───────────────────┤
+│ ghcr.io/neomediatech/exim:4.97 (ubuntu 24.04) │ ubuntu │        0        │    -    │         -         │
+└───────────────────────────────────────────────┴────────┴─────────────────┴─────────┴───────────────────┘
+Legend:
+- '-': Not scanned
+- '0': Clean (no security findings detected)
+
+-------------------------------------------------------
+lun 23 feb 2026, 16:44:29, CET --- ghcr.io/neomediatech/exim:latest
+
+Report Summary
+
+┌─────────────────────────────────────────────────┬────────┬─────────────────┬─────────┬───────────────────┐
+│                     Target                      │  Type  │ Vulnerabilities │ Secrets │ Misconfigurations │
+├─────────────────────────────────────────────────┼────────┼─────────────────┼─────────┼───────────────────┤
+│ ghcr.io/neomediatech/exim:latest (ubuntu 24.04) │ ubuntu │        0        │    -    │         -         │
+└─────────────────────────────────────────────────┴────────┴─────────────────┴─────────┴───────────────────┘
+Legend:
+- '-': Not scanned
+- '0': Clean (no security findings detected)
+
+-------------------------------------------------------
