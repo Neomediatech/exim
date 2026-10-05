@@ -48,3 +48,8 @@ lun 27 lug 2026, 12:23:31, CEST --- ghcr.io/neomediatech/exim:latest done (image
 lun 27 lug 2026, 12:25:18, CEST --- ghcr.io/neomediatech/exim:4.95 done (image build needed: true)
 lun 27 lug 2026, 12:26:22, CEST --- ghcr.io/neomediatech/exim:4.97 done (image build needed: true)
 lun 27 lug 2026, 12:31:43, CEST --- ghcr.io/neomediatech/exim:4.97-from-source done (image build needed: true)
+lun 5 ott 2026, 14:01:06, CEST --- ghcr.io/neomediatech/exim:latest done (image build needed: true)
+lun 5 ott 2026, 14:01:09, CEST --- ghcr.io/neomediatech/exim:rolling done (image build needed: true)
+lun 5 ott 2026, 14:02:05, CEST --- ghcr.io/neomediatech/exim:4.97 done (image build needed: true)
+lun 5 ott 2026, 14:02:11, CEST --- ghcr.io/neomediatech/exim:4.95 done (image build needed: true)
+lun 5 ott 2026, 14:10:24, CEST --- ghcr.io/neomediatech/exim:4.97-from-source done (image build needed: true)
